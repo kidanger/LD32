@@ -20,9 +20,21 @@ function Dark:init(x, y)
 	self.targetx = self.x
 	self.targety = self.y
 	self.wander_timer = drystal.new_timer(0.2)
+
+	self.part = drystal.new_system(x, y)
+	self.part:start()
+	self.part:set_texture(content.spritesheet, content.sprites.darkpart.x, content.sprites.darkpart.y)
+	self.part:set_colors { [0]='black', [1]='black' }
+	self.part:set_sizes { [0]=40, [1]=3 }
+	self.part:set_lifetime(1.4)
+	self.part:set_emission_rate(10)
+	self.part:set_initial_velocity(300)
+	self.part:set_initial_acceleration(-350)
 end
 
 function Dark:update(dt)
+	self.part:set_position(self.x, self.y)
+	self.part:update(dt)
 	if self.game:inside_dark_collide(self.targetx, self.targety) then
 		self.targetx = self.x
 		self.targety = self.y
@@ -65,6 +77,10 @@ function Dark:draw()
 	--drystal.draw_circle(self.x, self.y, self.radius)
 	--drystal.set_color'red'
 	--drystal.draw_circle(self.targetx, self.targety, 30)
+end
+
+function Dark:draw_particles()
+	self.part:draw()
 end
 
 function Dark:wander()

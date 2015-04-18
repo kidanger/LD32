@@ -56,6 +56,18 @@ function Game:update(dt)
 			b.on = false
 		end
 	end
+	for i, d in ipairs(self.map.darks) do
+		if d.little then
+			local touched = math.circle_circle(d.x, d.y, d.radius, l.x, l.y, l.radius)
+			if touched then
+				d:take_damage(dt)
+				if d.health == 0 then
+					table.remove(self.map.darks, i)
+					table.insert(self.map.items, {x=d.x, y=d.y, radius=TS/2})
+				end
+			end
+		end
+	end
 
 	if not self.hero.item then
 		for idx, i in ipairs(self.map.items) do
@@ -103,6 +115,7 @@ function Game:reset()
 	self.cy = cy
 	self.czoom = self.zoom
 	self.h = 0
+	collectgarbage()
 end
 
 function Game:next_level()

@@ -3,6 +3,7 @@ local drystal = require 'drystal'
 local Dark = require 'dark'
 local Door = require 'door'
 local Button = require 'button'
+local LittleDark = require 'littledark'
 local content = require 'content'
 
 local Map = {
@@ -48,6 +49,9 @@ function Map:reload()
 				safes[x][y] = true
 			elseif r==255 and g==0 and b==0 then
 				table.insert(self.darks, new(Dark, xx, yy))
+			elseif r==150 and g==0 and b==0 then
+				table.insert(self.darks, new(LittleDark, xx, yy))
+				maxitems = maxitems + 1
 			elseif r==200 and g==255 and b==0 then
 				self.chest = new(require 'chest', xx, yy)
 			elseif r==255 and g==255 and b==0 then
@@ -167,16 +171,26 @@ end
 
 function Map:draw()
 	drystal.set_color 'white'
-	drystal.set_alpha(200+math.sin(TIME*4) * 20)
+	drystal.set_blend_mode(drystal.blends.add)
 	for _, s in ipairs(self.safes) do
-		drystal.draw_rect(s.x, s.y, s.w, s.h)
+		for x=s.x, s.x+s.w-1, TS do
+			for y=s.y, s.y+s.h-1, TS do
+				drystal.set_alpha(180+math.sin((x+y)/5+TIME*1.6) * 75)
+				drystal.draw_sprite_resized(content.sprites.safe, x-6.67/2, y-5.95/2, TS+6.67, TS+5.95)
+			end
+		end
 	end
+	drystal.set_blend_mode(drystal.blends.default)
 
 	drystal.set_blend_mode(drystal.blends.mult)
 	drystal.set_alpha(255)
 	drystal.set_color 'black'
 	for _, d in ipairs(self.darks) do
 		d:draw()
+	end
+	drystal.set_alpha(255)
+	for _, d in ipairs(self.darks) do
+		d:draw_particles()
 	end
 	drystal.set_blend_mode(drystal.blends.default)
 

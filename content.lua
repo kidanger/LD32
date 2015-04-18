@@ -28,6 +28,9 @@ local content = {
 			{x=0, y=32*7, w=32, h=32},
 			{x=0, y=32*8, w=32, h=32},
 		},
+		safe={
+			x=32*2, y=32*9, w=64, h=64
+		},
 		button_off={
 			x=32*2, y=32*3, w=32, h=32,
 		},
@@ -37,14 +40,21 @@ local content = {
 		circle={
 			x=32*5, y=32*5, w=64, h=64,
 		},
+		darkpart={
+			x=32*5, y=32*7, w=64, h=64,
+		},
+		lightpart={
+			x=32*5, y=32*9, w=64, h=64,
+		}
 	},
 	maps={
+		'dark3',
+		'dark2',
 		'basics1',
 		'basics2',
 		'basics3',
 		'dark1',
-		'dark2',
-		'dark3',
+		'littledark1',
 	},
 	colors={
 		'#30f030', '#3030f0', '#f03030', '#f0f030',
