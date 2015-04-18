@@ -6,13 +6,14 @@ local Light = {
 	dy=0,
 	targetx=nil,
 	targety=nil,
+	radius=32,
 }
 Light.__index = Light
 
 function Light:init(x, y)
 	self.sprite = content.sprites.light
-	self.x = x + self.sprite.w / 2
-	self.y = y + self.sprite.h / 2
+	self.x = x + self.radius / 2
+	self.y = y + self.radius / 2
 end
 
 function Light:update(dt)
@@ -41,6 +42,8 @@ function Light:draw()
 	drystal.set_alpha(200)
 	drystal.draw_sprite(self.sprite, self.x - self.sprite.w/2, self.y - self.sprite.h/2)
 	drystal.set_blend_mode(drystal.blends.default)
+
+	drystal.draw_circle(self.x, self.y, self.radius)
 end
 
 return Light

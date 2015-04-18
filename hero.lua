@@ -4,6 +4,9 @@ local content = require 'content'
 local Hero = {
 	dx=0,
 	dy=0,
+	radius=32 * 0.45,
+	health=1,
+	item=false,
 }
 Hero.__index = Hero
 
@@ -47,6 +50,9 @@ function Hero:update(dt)
 		self.y = newy
 	end
 
+	if self.game:inside_dark_collide(self.x, self.y) then
+		self.health = math.min(self.health + dt * .2, 1)
+	end
 	self.light:update(dt)
 end
 
@@ -58,6 +64,10 @@ function Hero:draw()
 	drystal.set_blend_mode(drystal.blends.default)
 
 	self.light:draw()
+end
+
+function Hero:take_damage(dmg)
+	self.health = math.max(0, self.health - dmg)
 end
 
 return Hero
