@@ -42,14 +42,17 @@ function Dark:update(dt)
 										function()
 											self:wander()
 										end)
+		self.part:set_emission_rate(6)
 	elseif self.wander_timer then
 		self.wander_timer:update(dt)
 		if self.wander_timer.finished then
 			self.wander_timer = nil
 		end
+		self.part:set_emission_rate(6)
 	elseif math.distance(self.targetx, self.targety, self.hero.x, self.hero.y) < self.radius_sight then
 		self.targetx = self.hero.x
 		self.targety = self.hero.y
+		self.part:set_emission_rate(12)
 	end
 
 	local speed = 9000 * dt

@@ -180,7 +180,6 @@ function Map:draw()
 			end
 		end
 	end
-	drystal.set_blend_mode(drystal.blends.default)
 
 	drystal.set_blend_mode(drystal.blends.mult)
 	drystal.set_alpha(255)

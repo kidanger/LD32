@@ -60,11 +60,13 @@ function Game:update(dt)
 		if d.little then
 			local touched = math.circle_circle(d.x, d.y, d.radius, l.x, l.y, l.radius)
 			if touched then
-				d:take_damage(dt)
+				d:take_damage(dt * .7)
 				if d.health == 0 then
 					table.remove(self.map.darks, i)
 					table.insert(self.map.items, {x=d.x, y=d.y, radius=TS/2})
 				end
+			else
+				d:be_calm()
 			end
 		end
 	end
@@ -74,6 +76,7 @@ function Game:update(dt)
 			if math.circle_circle(self.hero.x, self.hero.y, self.hero.radius, i.x, i.y, i.radius) then
 				table.remove(self.map.items, idx)
 				self.hero.item = true
+				break
 			end
 		end
 	else

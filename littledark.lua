@@ -27,6 +27,11 @@ end
 
 function LittleDark:update(dt)
 	self.part:update(dt)
+
+	if math.random() < 0.2 * dt then
+		-- cry, little dark, cry
+		self.part:emit(12)
+	end
 end
 
 function LittleDark:draw()
@@ -41,6 +46,10 @@ end
 function LittleDark:take_damage(dmg)
 	self.health = math.max(0, self.health - dmg)
 	self.part:set_emission_rate(30)
+end
+
+function LittleDark:be_calm()
+	self.part:set_emission_rate(3)
 end
 
 return LittleDark

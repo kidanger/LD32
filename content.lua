@@ -48,13 +48,17 @@ local content = {
 		}
 	},
 	maps={
-		'dark3',
-		'dark2',
 		'basics1',
 		'basics2',
 		'basics3',
 		'dark1',
+		'dark2',
+		'dark3',
 		'littledark1',
+		'littledark2',
+		'littledark3',
+		'laby1',
+		'laby2',
 	},
 	colors={
 		'#30f030', '#3030f0', '#f03030', '#f0f030',
