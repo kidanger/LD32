@@ -1,5 +1,4 @@
 local drystal = require 'drystal'
-drystal.set_reload_callback = drystal.set_reload_callback or function() end
 
 W, H = 900, 600
 
@@ -33,19 +32,13 @@ end
 
 TIME = 0
 function drystal.update(dt)
-	while dt > 0.016 do
-		TIME = TIME + 0.016
-		state:update(0.016)
-		dt = dt - 0.016
-	end
-	if dt > 0.001 then
-		state:update(dt)
-	end
+	TIME = TIME + 0.016
+	state:update(0.016)
 end
 
 function drystal.draw()
 	drystal.set_alpha(255)
-	drystal.set_color 'black'
+	drystal.set_color '#191919'
 	drystal.draw_background()
 
 	state:draw()

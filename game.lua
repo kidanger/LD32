@@ -30,6 +30,9 @@ function Game:update(dt)
 		d.game = self
 		d.hero = self.hero
 	end
+	for _, d in ipairs(self.map.doors) do
+		d.game = self
+	end
 
 	self.map:update(dt)
 	self.hero:update(dt)
@@ -136,7 +139,7 @@ function Game:hero_collide(x, y)
 	for _, d in ipairs(self.map.doors) do
 		local w, h = d.sprite.w, d.sprite.h
 		local box = {x=d.x-w/2, y=d.y-h/2, w=w, h=h}
-		if d.timer <= 2 and math.aabb_circle(box, x, y, self.hero.radius) then
+		if d.timer <= 1 and math.aabb_circle(box, x, y, self.hero.radius) then
 			return true
 		end
 	end
@@ -163,6 +166,13 @@ function Game:mouse_press(x, y, b)
 		local xx, yy = drystal.screen2scene(x, y)
 		self.hero.light.targetx = xx
 		self.hero.light.targety = yy
+		self.hero.light:pop()
+	end
+end
+
+function Game:key_press(k)
+	if k == 'return' then
+		set_state(new(Transition, self))
 	end
 end
 

@@ -15,7 +15,9 @@ Map.__index = Map
 
 function Map:init(name)
 	self.surface = assert(drystal.load_surface(name .. '.png'))
-	drystal.set_reload_callback(name, function() self:reload() end)
+	if drystal.set_reload_callback then
+		drystal.set_reload_callback(name, function() self:reload() end)
+	end
 	self:reload()
 end
 
@@ -27,6 +29,7 @@ function Map:reload()
 	self.doors = {}
 	self.buttons = {}
 	self.items = {}
+	local sx, sy
 	local maxitems = 0
 	for x=1, self.surface.w do
 		walls[x] = {}
@@ -38,7 +41,7 @@ function Map:reload()
 				goto continue
 			elseif r==0 and g==255 and b==0 then
 				self.spawnx, self.spawny = xx, yy
-				safes[x][y] = true
+				sx, sy = x, y
 			elseif r==0 and g==0 and b==0 then
 				walls[x][y] = true
 			elseif r==0 and g==255 and b==255 then
@@ -61,11 +64,16 @@ function Map:reload()
 				end
 			end
 
-			self.maxx = xx
-			self.maxy = yy
-
 			::continue::
 		end
+	end
+	self.maxx = self.surface.w * TS
+	self.maxy = self.surface.h * TS
+	if safes[sx][sy + 1]
+	or safes[sx][sy - 1]
+	or safes[sx + 1][sy]
+	or safes[sx - 1][sy] then
+		safes[sx][sy] = true
 	end
 	self.walls = self:merge(walls)
 	self.safes = self:merge(safes)
@@ -159,9 +167,8 @@ end
 
 function Map:draw()
 	drystal.set_color 'white'
-	drystal.set_alpha(200)
+	drystal.set_alpha(200+math.sin(TIME*4) * 20)
 	for _, s in ipairs(self.safes) do
-		drystal.set_alpha(200+math.sin(TIME*4) * 20)
 		drystal.draw_rect(s.x, s.y, s.w, s.h)
 	end
 

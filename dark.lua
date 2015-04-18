@@ -8,7 +8,7 @@ local Dark = {
 	targety=nil,
 	w=512,
 	h=512,
-	radius=120,
+	radius=130,
 	radius_sight=1000,
 }
 Dark.__index = Dark
@@ -63,8 +63,8 @@ function Dark:draw()
 							 self.w, self.h)
 	--drystal.set_color'red'
 	--drystal.draw_circle(self.x, self.y, self.radius)
-	drystal.set_color'red'
-	drystal.draw_circle(self.targetx, self.targety, 30)
+	--drystal.set_color'red'
+	--drystal.draw_circle(self.targetx, self.targety, 30)
 end
 
 function Dark:wander()

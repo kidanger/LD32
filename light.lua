@@ -21,7 +21,7 @@ function Light:update(dt)
 	self.dx = self.dx * friction
 	self.dy = self.dy * friction
 
-	local speed = 10000 * dt
+	local speed = 11000 * dt
 	if self.targetx then
 		self.dx = self.dx + (math.clamp(self.targetx - self.x, -speed, speed) - self.dx) * 0.1
 	end
@@ -34,6 +34,13 @@ function Light:update(dt)
 
 	self.x = self.x + self.dx * dt
 	self.y = self.y + self.dy * dt
+
+	if self.timer then
+		self.timer:update(dt)
+		if self.timer.finished then
+			self.timer = nil
+		end
+	end
 end
 
 function Light:draw()
@@ -43,7 +50,18 @@ function Light:draw()
 	drystal.draw_sprite(self.sprite, self.x - self.sprite.w/2, self.y - self.sprite.h/2)
 	drystal.set_blend_mode(drystal.blends.default)
 
-	drystal.draw_circle(self.x, self.y, self.radius)
+	drystal.draw_sprite_resized(content.sprites.circle, self.x - self.radius, self.y - self.radius,
+							 self.radius*2, self.radius*2)
+
+	if self.targetx and self.timer then
+		local radius = (self.timer.duration - self.timer.time) * self.radius
+		drystal.draw_sprite_resized(content.sprites.circle, self.targetx - radius, self.targety - radius,
+							  radius*2, radius*2)
+	end
+end
+
+function Light:pop()
+	self.timer = drystal.new_timer(.7)
 end
 
 return Light

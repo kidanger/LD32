@@ -8,6 +8,9 @@ local content = {
 		hero={
 			x=0, y=0, w=32, h=32,
 		},
+		oldlight={
+			x=64, y=0, w=64, h=64,
+		},
 		light={
 			x=128, y=0, w=128, h=128,
 		},
@@ -31,10 +34,17 @@ local content = {
 		button_on={
 			x=32*2, y=32*4, w=32, h=32,
 		},
+		circle={
+			x=32*5, y=32*5, w=64, h=64,
+		},
 	},
 	maps={
-		'basics',
+		'basics1',
 		'basics2',
+		'basics3',
+		'dark1',
+		'dark2',
+		'dark3',
 	},
 	colors={
 		'#30f030', '#3030f0', '#f03030', '#f0f030',

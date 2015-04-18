@@ -27,8 +27,13 @@ function Door:update(dt)
 		d = -dt
 	end
 
-	self.timer = math.clamp(self.timer + d*5, 0, #content.sprites.door_states - 1)
-	self.sprite = content.sprites.door_states[1 + math.floor(self.timer+.5)]
+	local hero = self.game.hero
+	local w, h = self.sprite.w, self.sprite.h
+	local box = {x=self.x-w/2, y=self.y-h/2, w=w, h=h}
+	if not math.aabb_circle(box, hero.x, hero.y, hero.radius) then
+		self.timer = math.clamp(self.timer + d, 0, #content.sprites.door_states - 1)
+		self.sprite = content.sprites.door_states[1 + math.floor(self.timer+.5)]
+	end
 end
 
 function Door:open()
