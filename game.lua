@@ -4,23 +4,20 @@ local Hero = require 'hero'
 local Map = require 'map'
 local Light = require 'light'
 local Dark = require 'dark'
+local Transition = require 'transition'
+local WinTransition = require 'wintransition'
 local content = require 'content'
 
 local Game = {
 	map_index=1,
 	cx=0, cy=0, czoom=1,
-	zoom=0.99,
+	zoom=0.85,
 	h=1,
 }
 Game.__index = Game
 
 function Game:init()
-	self.map = new(Map, content.maps[self.map_index])
-	local x, y = self.map:get_spawn()
-	self.hero = new(Hero, x, y)
-	self.hero.game = self
-	local light = new(Light, x, y)
-	self.hero.light = light
+	self:reset()
 end
 
 function Game:update(dt)
@@ -70,8 +67,6 @@ function Game:update(dt)
 						chest.x, chest.y, chest.radius) then
 			chest.items = chest.items + 1
 			self.hero.item = false
-			-- TODO: ding
-			-- TODO: CHECK WIN
 		end
 	end
 
@@ -82,11 +77,37 @@ function Game:update(dt)
 		end
 	end
 
+	if self.map.chest.items == self.map.chest.maxitems or drystal.keys.down then
+		set_state(new(WinTransition, self))
+	elseif self.hero.health == 0 or drystal.keys.up then
+		set_state(new(Transition, self))
+	end
+
 	local h = 1 - self.hero.health
 	self.h = self.h + (h - self.h) * .2
 end
 
-function Game:draw()
+function Game:reset()
+	self.map = new(Map, content.maps[self.map_index])
+	local x, y = self.map:get_spawn()
+	self.hero = new(Hero, x, y)
+	self.hero.game = self
+	local light = new(Light, x, y)
+	self.hero.light = light
+
+	local cx, cy = -self.hero.x + W/2, -self.hero.y + H/2
+	self.cx = cx
+	self.cy = cy
+	self.czoom = self.zoom
+	self.h = 0
+end
+
+function Game:next_level()
+	self.map_index = self.map_index + 1
+	self:reset()
+end
+
+function Game:draw_simple()
 	drystal.camera.x = self.cx
 	drystal.camera.y = self.cy
 	drystal.camera.zoom = self.czoom
@@ -98,6 +119,10 @@ function Game:draw()
 	drystal.set_color 'white'
 	drystal.set_alpha(255)
 	self.map:draw()
+end
+
+function Game:draw()
+	self:draw_simple()
 
 	drystal.postfx('vignette', 1.0 - self.h*.9, 0.0)
 end

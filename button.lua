@@ -22,8 +22,7 @@ function Button:update(dt)
 end
 
 function Button:draw()
-	drystal.set_color 'white'
-	drystal.set_alpha(255)
+	drystal.set_color(content.colors[self.id + 1])
 	if self.on then
 		self.sprite = content.sprites.button_on
 	else

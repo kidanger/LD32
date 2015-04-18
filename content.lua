@@ -11,8 +11,6 @@ local content = {
 		light={
 			x=128, y=0, w=128, h=128,
 		},
-		dark={
-		},
 		chest={
 			x=0, y=32*2, w=32, h=32,
 		},
@@ -35,7 +33,11 @@ local content = {
 		},
 	},
 	maps={
-		'basics'
+		'basics',
+		'basics2',
+	},
+	colors={
+		'#30f030', '#3030f0', '#f03030', '#f0f030',
 	},
 	small_font=assert(drystal.load_font('arial.ttf', 24)) -- TODO: changeme
 }

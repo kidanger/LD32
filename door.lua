@@ -27,7 +27,7 @@ function Door:update(dt)
 		d = -dt
 	end
 
-	self.timer = math.clamp(self.timer + d*3, 0, #content.sprites.door_states - 1)
+	self.timer = math.clamp(self.timer + d*5, 0, #content.sprites.door_states - 1)
 	self.sprite = content.sprites.door_states[1 + math.floor(self.timer+.5)]
 end
 
@@ -40,8 +40,7 @@ function Door:close()
 end
 
 function Door:draw()
-	drystal.set_color 'white'
-	drystal.set_alpha(255)
+	drystal.set_color(content.colors[self.id + 1])
 	if self.vertical then
 		drystal.draw_sprite_rotated(self.sprite, self.x - self.sprite.w/2, self.y - self.sprite.h/2,
 							  math.pi/2)

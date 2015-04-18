@@ -13,7 +13,6 @@ local Map = {
 }
 Map.__index = Map
 
-
 function Map:init(name)
 	self.surface = assert(drystal.load_surface(name .. '.png'))
 	drystal.set_reload_callback(name, function() self:reload() end)
@@ -144,6 +143,7 @@ function Map:predraw()
 	self.predraw_buffer:draw()
 
 	::others::
+	drystal.set_alpha(255)
 	for _, d in ipairs(self.doors) do
 		d:draw()
 	end
