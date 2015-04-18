@@ -1,0 +1,44 @@
+
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Emscripten-Generated Code</title>
+    <style>
+      html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
+      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+      textarea.emscripten { font-family: monospace; width: 80%; }
+      div.emscripten { text-align: center; }
+      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+      canvas.emscripten { border: 0px none; }
+    </style>
+  </head>
+  <body>
+    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+    <textarea class="emscripten" id="output" rows="8"></textarea>
+
+    <script type='text/javascript'>
+      // connect to canvas
+      var Module = {
+        print: (function() {
+          var element = document.getElementById('output');
+          element.value = ''; // clear browser cache
+          return function(text) {
+            text = Array.prototype.slice.call(arguments).join(' ');
+            element.value += text + "\n";
+            element.scrollTop = 99999; // focus on bottom
+          };
+        })(),
+        canvas: document.getElementById('canvas'),
+      };
+      Module.printErr = Module.print;
+    </script>
+    
+<script type='text/javascript'>
+Module['arguments'] = ['--zip=game.zip', 'main.lua'];
+</script>
+
+    <script type="text/javascript" src="drystal.js"></script>
+  </body>
+</html>
