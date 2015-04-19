@@ -69,7 +69,7 @@ function Hero:update(dt)
 	self.dangle = self.dangle + (angle - self.dangle) * .2
 
 	local speed = self.dx ^ 2 + self.dy ^ 2
-	local fact = speed / 100000
+	local fact = speed / 130000
 	self.walk = self.walk + dt * fact
 end
 
@@ -88,6 +88,10 @@ function Hero:draw()
 	if speed > 3000 then
 		local id = 1 + math.floor(self.walk*10) % 2
 		sp = content.sprites.hero_walk[id]
+		if id ~= self.oldid then
+			content.sounds.feet[id]:play(.7)
+		end
+		self.oldid = id
 	end
 	drystal.draw_sprite(sp, self.x - sp.w/2, self.y - sp.h/2, transform)
 

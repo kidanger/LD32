@@ -71,7 +71,22 @@ local content = {
 	colors={
 		'#30f030', '#3030f0', '#f03030', '#f0f030',
 	},
-	small_font=assert(drystal.load_font('arial.ttf', 24)) -- TODO: changeme
+	sounds={
+		bup=assert(drystal.load_sound('sounds/bup.wav')),
+		aww=assert(drystal.load_sound('sounds/aww.wav')),
+		chest=assert(drystal.load_sound('sounds/chest.wav')),
+		off=assert(drystal.load_sound('sounds/off.wav')),
+		on=assert(drystal.load_sound('sounds/on.wav')),
+		pickup=assert(drystal.load_sound('sounds/pickup.wav')),
+		spawn=assert(drystal.load_sound('sounds/spwan.wav')),
+		toudoc=assert(drystal.load_sound('sounds/toudoc.wav')),
+		kill=assert(drystal.load_sound('sounds/kill.wav')),
+		feet={
+			assert(drystal.load_sound('sounds/foot1.wav')),
+			assert(drystal.load_sound('sounds/foot2.wav')),
+		},
+	},
+	small_font=assert(drystal.load_font('arial.ttf', 24))
 }
 
 content.spritesheet:set_filter(drystal.filters.nearest)

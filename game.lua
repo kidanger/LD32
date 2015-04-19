@@ -11,8 +11,8 @@ local content = require 'content'
 local Game = {
 	map_index=1,
 	cx=0, cy=0, czoom=1,
-	mx=0, my=0, mangle=0,
-	cmx=0, cmy=0,
+	mx=W/2, my=H/2, mangle=0,
+	cmx=W/2, cmy=H/2,
 	zoom=0.85,
 	h=1,
 }
@@ -52,6 +52,7 @@ function Game:update(dt)
 				end
 			end
 			b.on = true
+			content.sounds.on:play()
 		elseif not touched and b.on then
 			for _, d in ipairs(self.map.doors) do
 				if d.id == b.id then
@@ -59,6 +60,7 @@ function Game:update(dt)
 				end
 			end
 			b.on = false
+			content.sounds.off:play()
 		end
 	end
 	for i, d in ipairs(self.map.darks) do
@@ -69,6 +71,7 @@ function Game:update(dt)
 				if d.health == 0 then
 					table.remove(self.map.darks, i)
 					table.insert(self.map.items, {x=d.x, y=d.y, radius=TS/2})
+					content.sounds.kill:play()
 				end
 			else
 				d:be_calm()
@@ -81,6 +84,7 @@ function Game:update(dt)
 			if math.circle_circle(self.hero.x, self.hero.y, self.hero.radius, i.x, i.y, i.radius) then
 				table.remove(self.map.items, idx)
 				self.hero.item = true
+				content.sounds.pickup:play(0.5)
 				break
 			end
 		end
@@ -90,6 +94,9 @@ function Game:update(dt)
 						chest.x, chest.y, chest.radius) then
 			chest.items = chest.items + 1
 			self.hero.item = false
+			if chest.items ~= chest.maxitems then
+				content.sounds.chest:play()
+			end
 		end
 	end
 
@@ -101,8 +108,10 @@ function Game:update(dt)
 	end
 
 	if self.map.chest.items == self.map.chest.maxitems or drystal.keys.down then
+		content.sounds.toudoc:play()
 		set_state(new(WinTransition, self))
 	elseif self.hero.health == 0 or drystal.keys.up then
+		content.sounds.aww:play()
 		set_state(new(Transition, self))
 	end
 
@@ -205,6 +214,8 @@ function Game:mouse_press(x, y, b)
 		self.hero.light.targetx = xx
 		self.hero.light.targety = yy
 		self.hero.light:pop()
+		local a = math.atan2(yy - self.hero.y, xx - self.hero.x)
+		content.sounds.bup:play(1, math.cos(a), math.sin(a))
 	end
 end
 

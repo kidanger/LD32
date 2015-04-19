@@ -23,7 +23,7 @@ function Dark:init(x, y)
 
 	self.part = drystal.new_system(x, y)
 	self.part:start()
-	self.part:set_texture(content.spritesheet, content.sprites.darkpart.x, content.sprites.darkpart.y)
+	--self.part:set_texture(content.spritesheet, content.sprites.darkpart.x, content.sprites.darkpart.y)
 	self.part:set_colors { [0]='black', [1]='black' }
 	self.part:set_sizes { [0]=40, [1]=3 }
 	self.part:set_lifetime(1.4)

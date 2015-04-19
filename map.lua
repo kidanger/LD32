@@ -15,7 +15,7 @@ local Map = {
 Map.__index = Map
 
 function Map:init(name)
-	self.surface = assert(drystal.load_surface(name .. '.png'))
+	self.surface = assert(drystal.load_surface('levels/' .. name .. '.png'))
 	if drystal.set_reload_callback then
 		drystal.set_reload_callback(name, function() self:reload() end)
 	end

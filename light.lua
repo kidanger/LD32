@@ -17,7 +17,7 @@ function Light:init(x, y)
 
 	self.part = drystal.new_system(self.x, self.y)
 	self.part:start()
-	self.part:set_texture(content.spritesheet, content.sprites.lightpart.x, content.sprites.lightpart.y)
+	--self.part:set_texture(content.spritesheet, content.sprites.lightpart.x, content.sprites.lightpart.y)
 	self.part:set_colors { [0]='white', [1]='white' }
 	self.part:set_sizes { [0]=8, [1]=1 }
 	self.part:set_lifetime(2.)
