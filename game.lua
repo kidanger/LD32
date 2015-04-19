@@ -9,7 +9,7 @@ local WinTransition = require 'wintransition'
 local content = require 'content'
 
 local Game = {
-	map_index=1,
+	map_index=0,
 	cx=0, cy=0, czoom=1,
 	mx=W/2, my=H/2, mangle=0,
 	cmx=W/2, cmy=H/2,
@@ -23,6 +23,7 @@ function Game:init()
 end
 
 function Game:update(dt)
+	if self.map_index == 0 then return end
 	local cx, cy = -self.hero.x + W/2, -self.hero.y + H/2
 	self.cx = self.cx + (cx - self.cx) * 0.2
 	self.cy = self.cy + (cy - self.cy) * 0.2
@@ -120,6 +121,8 @@ function Game:update(dt)
 end
 
 function Game:reset()
+	if self.map_index == 0 then return end
+
 	self.map = new(Map, content.maps[self.map_index])
 	local x, y = self.map:get_spawn()
 	self.hero = new(Hero, x, y)
@@ -141,6 +144,7 @@ function Game:next_level()
 end
 
 function Game:draw_simple()
+	if self.map_index == 0 then return end
 	drystal.camera.x = self.cx
 	drystal.camera.y = self.cy
 	drystal.camera.zoom = self.czoom

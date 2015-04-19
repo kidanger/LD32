@@ -89,7 +89,7 @@ function Hero:draw()
 		local id = 1 + math.floor(self.walk*10) % 2
 		sp = content.sprites.hero_walk[id]
 		if id ~= self.oldid then
-			content.sounds.feet[id]:play(.7)
+			content.sounds.feet[id]:play(.5)
 		end
 		self.oldid = id
 	end

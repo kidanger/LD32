@@ -67,6 +67,7 @@ local content = {
 		'littledark3',
 		'laby1',
 		'laby2',
+		'end',
 	},
 	colors={
 		'#30f030', '#3030f0', '#f03030', '#f0f030',
@@ -86,7 +87,67 @@ local content = {
 			assert(drystal.load_sound('sounds/foot2.wav')),
 		},
 	},
-	small_font=assert(drystal.load_font('arial.ttf', 24))
+	musics={
+		m1=assert(drystal.load_music('musics/m1.ogg')),
+	},
+	texts={
+[[
+You found a strange device. It says: "Collect light fragments".
+Activation...
+It glows!
+Move with ZQSD, use left click to command the glowy thing.
+]],
+[[
+It appears that the glowy thing can activate levers.
+Interesting.
+(Press 'm' to mute the music, 'l' to mute the sounds.)
+]],
+[[
+Well, it looks glowyly harmless.
+]],
+[[
+There are some dark things not far from here.
+They don't look so friendly.
+You may want to avoid them.
+Just 'saying.
+]],
+[[
+Okay, that was not so hard.
+Oh... There is more.
+]],
+[[
+Snap, that was close.
+]],
+[[
+"War is not nice"
+    - Someone
+]],
+[[
+Were they some kind of children? Dark children?
+Well, at least they dropped light fragments when they died.
+]],
+[[
+Look over here, it looks like a dorm.
+Maybe we could collect some more fragments for the glowy thing.
+]],
+[[
+Uff.
+Light always triumphs over darkness.
+]],
+[[
+Well, that was some kind of labyrinth.
+They seems more and more furious.
+I don't know why! :D
+]],
+[[
+Whoo!
+Now that I've collected all the light fragments,
+darkness won't be able to stand so much glowyness!
+The world is safe. Light can prevail over all the things.
+]]
+	},
+	small_font=assert(drystal.load_font('arial.ttf', 24)),
+	font=assert(drystal.load_font('arial.ttf', 30)),
 }
 
 content.spritesheet:set_filter(drystal.filters.nearest)

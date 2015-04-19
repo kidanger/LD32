@@ -28,7 +28,11 @@ function Chest:draw()
 
 	drystal.set_color 'yellow'
 	local text = ('{shadowx:2|shadowy:3|%d/%d}'):format(self.items, self.maxitems)
-	content.small_font:draw(text, self.x - 14, self.y - self.sprite.h - 5, drystal.aligns.center)
+	if self.maxitems < 10 then
+		content.small_font:draw(text, self.x - 14, self.y - self.sprite.h - 5, drystal.aligns.center)
+	else
+		content.small_font:draw(text, self.x - 21, self.y - self.sprite.h - 5, drystal.aligns.center)
+	end
 end
 
 function Chest:draw_after_stuff()

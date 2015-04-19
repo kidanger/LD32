@@ -1,4 +1,11 @@
 local drystal = require 'drystal'
+local content = require 'content'
+
+if drystal.is_web then
+	drystal.run_js([[
+				document.getElementById('text').style.display = 'none';
+				]])
+end
 
 W, H = 900, 600
 
@@ -26,9 +33,11 @@ function set_state(s)
 end
 
 function drystal.init()
+	collectgarbage()
 	drystal.resize(W, H)
 	drystal.show_cursor(false)
-	state = new(require 'game')
+	state = new(require 'wintransition', new(require 'game'))
+	content.musics.m1:play(true)
 end
 
 TIME = 0
@@ -46,10 +55,27 @@ function drystal.draw()
 end
 
 drystal.keys = {}
+local mute = false
+local mute_sound = false
 function drystal.key_press(k)
 	drystal.keys[k] = true
 	if state.key_press then
 		state:key_press(k)
+	end
+	if k == 'm' then
+		mute = not mute
+		if mute then
+			content.musics.m1:pause()
+		else
+			content.musics.m1:play()
+		end
+	elseif k == 'l' then
+		mute_sound = not mute_sound
+		if mute_sound then
+			drystal.set_sound_volume(0)
+		else
+			drystal.set_sound_volume(1)
+		end
 	end
 end
 
