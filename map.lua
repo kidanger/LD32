@@ -162,14 +162,14 @@ function Map:predraw()
 	for _, b in ipairs(self.buttons) do
 		b:draw()
 	end
+	drystal.set_color 'white'
 	for _, i in ipairs(self.items) do
-		drystal.draw_sprite(content.sprites.item, i.x-i.radius, i.y-i.radius)
+		drystal.draw_sprite_rotated(content.sprites.item, i.x-i.radius, i.y-i.radius, TIME)
+		drystal.draw_sprite_rotated(content.sprites.item, i.x-i.radius, i.y-i.radius, -TIME)
 	end
 
 	self.chest:draw()
-end
 
-function Map:draw()
 	drystal.set_color 'white'
 	drystal.set_blend_mode(drystal.blends.add)
 	for _, s in ipairs(self.safes) do
@@ -180,7 +180,10 @@ function Map:draw()
 			end
 		end
 	end
+	drystal.set_blend_mode(drystal.blends.default)
+end
 
+function Map:draw()
 	drystal.set_blend_mode(drystal.blends.mult)
 	drystal.set_alpha(255)
 	drystal.set_color 'black'

@@ -27,8 +27,8 @@ function Chest:draw()
 	drystal.draw_sprite(self.sprite, self.x - self.sprite.w / 2, self.y - self.sprite.h / 2)
 
 	drystal.set_color 'yellow'
-	local text = ('%d/%d'):format(self.items, self.maxitems)
-	content.small_font:draw(text, self.x, self.y - self.sprite.h - 5, drystal.aligns.center)
+	local text = ('{shadowx:2|shadowy:3|%d/%d}'):format(self.items, self.maxitems)
+	content.small_font:draw(text, self.x - 14, self.y - self.sprite.h - 5, drystal.aligns.center)
 end
 
 function Chest:draw_after_stuff()

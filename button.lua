@@ -28,7 +28,7 @@ function Button:draw()
 	else
 		self.sprite = content.sprites.button_off
 	end
-	drystal.draw_sprite(self.sprite, self.x - self.sprite.w/2, self.y - self.sprite.h/2)
+	drystal.draw_sprite_rotated(self.sprite, self.x - self.sprite.w/2, self.y - self.sprite.h/2, TIME/2)
 end
 
 return Button

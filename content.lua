@@ -6,7 +6,12 @@ local content = {
 	spritesheet=assert(drystal.load_surface('spritesheet.png')),
 	sprites={
 		hero={
-			x=0, y=0, w=32, h=32,
+			x=0, y=32*9, w=40, h=17,
+		},
+		hero_walk={
+			{x=0, y=32*10, w=40, h=17},
+			{x=0, y=32*11, w=40, h=17},
+			{x=0, y=32*9, w=40, h=17},
 		},
 		oldlight={
 			x=64, y=0, w=64, h=64,
@@ -45,7 +50,10 @@ local content = {
 		},
 		lightpart={
 			x=32*5, y=32*9, w=64, h=64,
-		}
+		},
+		cursor={
+			x=32*5, y=32*11, w=64, h=64,
+		},
 	},
 	maps={
 		'basics1',

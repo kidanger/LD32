@@ -11,6 +11,8 @@ local content = require 'content'
 local Game = {
 	map_index=1,
 	cx=0, cy=0, czoom=1,
+	mx=0, my=0, mangle=0,
+	cmx=0, cmy=0,
 	zoom=0.85,
 	h=1,
 }
@@ -25,6 +27,9 @@ function Game:update(dt)
 	self.cx = self.cx + (cx - self.cx) * 0.2
 	self.cy = self.cy + (cy - self.cy) * 0.2
 	self.czoom = self.czoom + (self.zoom - self.czoom) * 0.2
+	self.cmx = self.cmx + (self.mx - self.cmx) * .4
+	self.cmy = self.cmy + (self.my - self.cmy) * .4
+	self.mangle = self.mangle + dt * .7
 
 	for _, d in ipairs(self.map.darks) do
 		d.game = self
@@ -138,6 +143,19 @@ function Game:draw_simple()
 	drystal.set_color 'white'
 	drystal.set_alpha(255)
 	self.map:draw()
+
+	drystal.set_color 'white'
+	drystal.set_alpha(150 + 25+math.sin(TIME*5)*50)
+	drystal.camera.push()
+	drystal.camera.reset()
+	local sp = content.sprites.cursor
+	local transform = {
+		wfactor=.5,
+		hfactor=.5,
+		angle=self.mangle,
+	}
+	drystal.draw_sprite(sp, self.cmx-sp.w/4, self.cmy-sp.h/4, transform)
+	drystal.camera.pop()
 end
 
 function Game:draw()
@@ -175,6 +193,10 @@ function Game:inside_dark_collide(x, y)
 			return true
 		end
 	end
+end
+
+function Game:mouse_motion(x, y)
+	self.mx, self.my = x, y
 end
 
 function Game:mouse_press(x, y, b)

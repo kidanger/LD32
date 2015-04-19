@@ -27,6 +27,7 @@ end
 
 function drystal.init()
 	drystal.resize(W, H)
+	drystal.show_cursor(false)
 	state = new(require 'game')
 end
 
