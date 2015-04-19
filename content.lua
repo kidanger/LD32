@@ -100,7 +100,7 @@ Move with WASD, use left click to command the glowy thing.
 [[
 It appears that the glowy thing can activate levers.
 Interesting.
-(Press 'm' to mute the music, 'l' to mute the sounds.)
+(Press 'M' to mute the music, 'L' to mute the sounds.)
 ]],
 [[
 The glowy thing looks hungry for light fragments.
