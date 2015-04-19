@@ -31,7 +31,7 @@ function Chest:draw()
 	if self.maxitems < 10 then
 		content.small_font:draw(text, self.x - 14, self.y - self.sprite.h - 5, drystal.aligns.center)
 	else
-		content.small_font:draw(text, self.x - 27, self.y - self.sprite.h - 5, drystal.aligns.center)
+		content.small_font:draw(text, self.x - 22, self.y - self.sprite.h - 5, drystal.aligns.center)
 	end
 end
 

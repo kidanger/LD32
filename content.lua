@@ -146,7 +146,7 @@ Light always triumphs over darkness.
 ]],
 [[
 Well, that was some kind of labyrinth.
-They seems more and more furious.
+They seem more and more furious.
 ]],
 [[
 Whoo!
