@@ -103,7 +103,9 @@ Interesting.
 (Press 'm' to mute the music, 'l' to mute the sounds.)
 ]],
 [[
-Well, it looks glowyly harmless.
+The glowy thing looks hungry for light fragments.
+Go collect some more.
+Please.
 ]],
 [[
 There are some dark things not far from here.
@@ -137,11 +139,10 @@ Light always triumphs over darkness.
 [[
 Well, that was some kind of labyrinth.
 They seems more and more furious.
-I don't know why! :D
 ]],
 [[
 Whoo!
-Now that I've collected all the light fragments,
+Now that you've collected all the light fragments,
 darkness won't be able to stand so much glowyness!
 The world is safe. Light can prevail over all the things.
 ]]
