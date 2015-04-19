@@ -223,7 +223,7 @@ function Game:mouse_press(x, y, b)
 		self.hero.light.targety = yy
 		self.hero.light:pop()
 		local a = math.atan2(yy - self.hero.y, xx - self.hero.x)
-		content.sounds.bup:play(1, math.cos(a)/2, math.sin(a)/2)
+		content.sounds.bup:play(0.4, math.cos(a)/2, math.sin(a)/2)
 	end
 end
 

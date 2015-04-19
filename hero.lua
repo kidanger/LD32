@@ -91,10 +91,16 @@ function Hero:draw()
 	}
 
 	local sp = self.sprite
+	if self.item then
+		sp = content.sprites.hero_item
+	end
 	local speed = self.dx ^ 2 + self.dy ^ 2
 	if speed > 3000 then
 		local id = 1 + math.floor(self.walk*10) % 2
 		sp = content.sprites.hero_walk[id]
+		if self.item then
+			sp = content.sprites.hero_walk_item[id]
+		end
 		if id ~= self.oldid then
 			content.sounds.feet[id]:play(.5)
 		end
