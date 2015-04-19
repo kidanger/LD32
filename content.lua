@@ -95,7 +95,7 @@ local content = {
 You found a strange device. It says: "Collect light fragments".
 Activation...
 It glows!
-Move with ZQSD, use left click to command the glowy thing.
+Move with WASD, use left click to command the glowy thing.
 ]],
 [[
 It appears that the glowy thing can activate levers.

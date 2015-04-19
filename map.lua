@@ -82,7 +82,6 @@ function Map:reload()
 	self.walls = self:merge(walls)
 	self.safes = self:merge(safes)
 	self.chest.maxitems = maxitems
-	print(#self.walls, #self.safes)
 end
 
 function Map:merge(grid)

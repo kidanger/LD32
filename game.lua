@@ -120,6 +120,10 @@ function Game:update(dt)
 	self.h = self.h + (h - self.h) * .2
 end
 
+function Game:on_enter()
+	content.sounds.spawn:play()
+end
+
 function Game:reset()
 	if self.map_index == 0 then return end
 
@@ -219,7 +223,7 @@ function Game:mouse_press(x, y, b)
 		self.hero.light.targety = yy
 		self.hero.light:pop()
 		local a = math.atan2(yy - self.hero.y, xx - self.hero.x)
-		content.sounds.bup:play(1, math.cos(a), math.sin(a))
+		content.sounds.bup:play(1, math.cos(a)/2, math.sin(a)/2)
 	end
 end
 

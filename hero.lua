@@ -18,20 +18,25 @@ function Hero:init(x, y)
 	self.y = y + self.sprite.h / 2
 end
 
+local UP = 'w'
+local DOWN = 's'
+local LEFT = 'd'
+local RIGHT = 'a'
+
 function Hero:update(dt)
 	local friction = 0.85
 	local dx = self.dx * friction
 	local dy = self.dy * friction
 
 	local speed = 15500 * dt
-	if (drystal.keys.q or drystal.keys.d) and (drystal.keys.z or drystal.keys.s) then
+	if (drystal.keys[RIGHT] or drystal.keys[LEFT]) and (drystal.keys[UP] or drystal.keys[DOWN]) then
 		speed = speed / math.sqrt(2)
 	end
 
-	if drystal.keys.q then
+	if drystal.keys[RIGHT] then
 		dx = -speed
 	end
-	if drystal.keys.d then
+	if drystal.keys[LEFT] then
 		dx = speed
 	end
 
@@ -41,10 +46,10 @@ function Hero:update(dt)
 		self.x = newx
 	end
 
-	if drystal.keys.z then
+	if drystal.keys[UP] then
 		dy = -speed
 	end
-	if drystal.keys.s then
+	if drystal.keys[DOWN] then
 		dy = speed
 	end
 

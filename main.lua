@@ -2,9 +2,7 @@ local drystal = require 'drystal'
 local content = require 'content'
 
 if drystal.is_web then
-	drystal.run_js([[
-				document.getElementById('text').style.display = 'none';
-				]])
+	drystal.run_js "document.getElementById('text').style.display = 'none';"
 end
 
 W, H = 900, 600
