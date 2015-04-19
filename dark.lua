@@ -38,7 +38,7 @@ function Dark:update(dt)
 	if self.game:inside_dark_collide(self.targetx, self.targety) then
 		self.targetx = self.x
 		self.targety = self.y
-		self.wander_timer = drystal.new_timer(2,
+		self.wander_timer = drystal.new_timer(0.5,
 										function()
 											self:wander()
 										end)
@@ -88,11 +88,11 @@ end
 
 function Dark:wander()
 	local a = math.random() * math.pi * 2
-	self.targetx = self.x + math.cos(a) * self.radius
-	self.targety = self.x + math.sin(a) * self.radius
+	self.targetx = self.x + math.cos(a) * self.radius * 5
+	self.targety = self.x + math.sin(a) * self.radius * 5
 	self.targetx = math.clamp(self.targetx, 0, self.game.map.maxx)
 	self.targety = math.clamp(self.targety, 0, self.game.map.maxy)
-	self.wander_timer = drystal.new_timer(0.5)
+	self.wander_timer = drystal.new_timer(1.5)
 end
 
 return Dark
