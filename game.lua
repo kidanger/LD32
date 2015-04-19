@@ -108,10 +108,10 @@ function Game:update(dt)
 		end
 	end
 
-	if self.map.chest.items == self.map.chest.maxitems or drystal.keys.down then
+	if self.map.chest.items == self.map.chest.maxitems then
 		content.sounds.toudoc:play()
 		set_state(new(WinTransition, self))
-	elseif self.hero.health == 0 or drystal.keys.up then
+	elseif self.hero.health == 0 then
 		content.sounds.aww:play()
 		set_state(new(Transition, self))
 	end

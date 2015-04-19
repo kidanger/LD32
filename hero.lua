@@ -20,8 +20,8 @@ end
 
 local UP = 'w'
 local DOWN = 's'
-local LEFT = 'd'
-local RIGHT = 'a'
+local LEFT = 'a'
+local RIGHT = 'd'
 
 function Hero:update(dt)
 	local friction = 0.85
@@ -31,13 +31,15 @@ function Hero:update(dt)
 	local speed = 15500 * dt
 	if (drystal.keys[RIGHT] or drystal.keys[LEFT]) and (drystal.keys[UP] or drystal.keys[DOWN]) then
 		speed = speed / math.sqrt(2)
+	elseif (drystal.keys['right'] or drystal.keys['left']) and (drystal.keys['up'] or drystal.keys['down']) then
+		speed = speed / math.sqrt(2)
 	end
 
-	if drystal.keys[RIGHT] then
-		dx = -speed
-	end
-	if drystal.keys[LEFT] then
+	if drystal.keys[RIGHT] or drystal.keys['right'] then
 		dx = speed
+	end
+	if drystal.keys[LEFT] or drystal.keys['left'] then
+		dx = -speed
 	end
 
 	self.dx = dx
@@ -46,10 +48,10 @@ function Hero:update(dt)
 		self.x = newx
 	end
 
-	if drystal.keys[UP] then
+	if drystal.keys[UP] or drystal.keys['up'] then
 		dy = -speed
 	end
-	if drystal.keys[DOWN] then
+	if drystal.keys[DOWN] or drystal.keys['down'] then
 		dy = speed
 	end
 
