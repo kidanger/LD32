@@ -24,7 +24,7 @@ end
 
 function Game:update(dt)
 	if self.map_index == 0 then return end
-	local cx, cy = -self.hero.x + W/2, -self.hero.y + H/2
+	local cx, cy = self.hero.x - W/2, self.hero.y - H/2
 	self.cx = self.cx + (cx - self.cx) * 0.2
 	self.cy = self.cy + (cy - self.cy) * 0.2
 	self.czoom = self.czoom + (self.zoom - self.czoom) * 0.2
@@ -134,7 +134,7 @@ function Game:reset()
 	local light = new(Light, x, y)
 	self.hero.light = light
 
-	local cx, cy = -self.hero.x + W/2, -self.hero.y + H/2
+	local cx, cy = self.hero.x - W/2, self.hero.y - H/2
 	self.cx = cx
 	self.cy = cy
 	self.czoom = self.zoom
